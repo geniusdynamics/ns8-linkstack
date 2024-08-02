@@ -14,20 +14,25 @@ import agent
 data = json.load(sys.stdin)
 
 #This is specific to you module, so you need to change it accordingly.
-# we read a json stdin {"vars1":true, "var2":"foo", "vars3": 3} and we writ it to .config/state/environment
-# Upper case to set environment variable and minor case to read from stdin
+# --env HTTP_SERVER_NAME="www.example.xyz" \
+#     --env HTTPS_SERVER_NAME="www.example.xyz" \
+#     --env SERVER_ADMIN="admin@example.xyz" \
+#     --env TZ="Europe/Berlin" \
+#     --env PHP_MEMORY_LIMIT="512M" \
+#     --env UPLOAD_MAX_FILESIZE="8M" \
+HOST = data.get('host')
+SERVER_ADMIN = data.get('SERVER_ADMIN', 'admin@linkstack.org')
+TZ = data.get('TZ', 'UTC')
+PHP_MEMORY_LIMIT = data.get('PHP_MEMORY_LIMIT', '256M')
+UPLOAD_MAX_FILESIZE = data.get('UPLOAD_MAX_FILESIZE', '8M')
 
-# this values must exists in the json stdin
-# agent.set_env("MAIL_SERVER", data["mail_server"])
-# agent.set_env("LDAP_DOMAIN", data["ldap_domain"])
-
-# you can add default values for the following variables
-# agent.set_env("MAIL_DOMAIN",data.get("mail_domain",""))
-# agent.set_env("WOWORKERSCOUNT",data.get("workers_count",3))
-# agent.set_env("AUXILIARYACCOUNT",data.get("auxiliary_account",True))
-# agent.set_env("ACTIVESYNC",data.get("activesync",False))
-
-
-# Make sure everything is saved inside the environment file
-# just before starting systemd unit
+linkstack = {
+    'HTTP_SERVER_NAME': HOST,
+    'HTTPS_SERVER_NAME': HOST,
+    'SERVER_ADMIN': SERVER_ADMIN,
+    'TZ': TZ,
+    'PHP_MEMORY_LIMIT': PHP_MEMORY_LIMIT,
+    'UPLOAD_MAX_FILESIZE': UPLOAD_MAX_FILESIZE
+}
+agent.write_envfile("linkstack.env", linkstack)
 #agent.dump_env()

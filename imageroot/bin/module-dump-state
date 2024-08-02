@@ -5,17 +5,17 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-set -e
-
-if ! systemctl --user -q is-active linkstack.service; then
-    exit 0
-fi
-
-podman exec mariadb-app mysqldump \
-        --databases linkstack \
-        --default-character-set=utf8mb4 \
-        --skip-dump-date \
-        --ignore-table=mysql.event \
-        --single-transaction \
-        --quick \
-        --add-drop-table  > linkstack.sql
+#set -e
+#
+#if ! systemctl --user -q is-active linkstack.service; then
+#    exit 0
+#fi
+#
+#podman exec mariadb-app mysqldump \
+#        --databases linkstack \
+#        --default-character-set=utf8mb4 \
+#        --skip-dump-date \
+#        --ignore-table=mysql.event \
+#        --single-transaction \
+#        --quick \
+#        --add-drop-table  > linkstack.sql
