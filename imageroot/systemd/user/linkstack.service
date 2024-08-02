@@ -10,8 +10,8 @@
 
 [Unit]
 Description=Podman linkstack.service
-Requires=mariadb-app.service linkstack-app.service
-Before=mariadb-app.service linkstack-app.service
+Requires=linkstack-app.service
+Before=linkstack-app.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n

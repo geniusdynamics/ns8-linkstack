@@ -24,7 +24,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/linkstack-app.pid \
     --volume linkstack-app:/var/www/html/:Z \
     --volume ./tmp:/tmp:Z \
     --env-file=%S/state/database.env \
-    ${NGINX_IMAGE}
+    ${LINKSTACK_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/linkstack-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP linkstack-app
 SyslogIdentifier=%u
