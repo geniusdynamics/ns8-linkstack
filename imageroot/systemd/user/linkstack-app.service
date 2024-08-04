@@ -6,7 +6,7 @@
 [Unit]
 Description=Podman  linkstack-app.service
 BindsTo=linkstack.service
-After=linkstack.service mariadb-app.service
+After=linkstack.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
