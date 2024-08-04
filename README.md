@@ -6,12 +6,12 @@
 
 Instantiate the module with:
 
-    add-module ghcr.io/gesniusdynamics/linkstack:latest 1
+    add-module ghcr.io/geniusdynamics/linkstack:latest 1
 
 The output of the command will return the instance name.
 Output example:
 
-    {"module_id": "linkstack1", "image_name": "linkstack", "image_url": "ghcr.io/gesniusdynamics/linkstack:latest"}
+    {"module_id": "linkstack1", "image_name": "linkstack", "image_url": "ghcr.io/geniusdynamics/linkstack:latest"}
 
 ## Configure
 
@@ -45,7 +45,12 @@ You can retrieve the configuration with
 ```
 api-cli run get-configuration --agent module/linkstack1
 ```
+## Update
+Update instance
 
+```shell
+api-cli run update-module --data '{"module_url":"ghcr.io/geniusdynamics/linkstack:latest","instances":["linkstack1"],"force":true}'
+```
 ## Uninstall
 
 To uninstall the instance:
@@ -58,7 +63,7 @@ Some configuration settings, like the smarthost setup, are not part of the
 `configure-module` action input: they are discovered by looking at some
 Redis keys.  To ensure the module is always up-to-date with the
 centralized [smarthost
-setup](https://gesniusdynamics.github.io/ns8-core/core/smarthost/) every time
+setup](https://geniusdynamics.github.io/ns8-core/core/smarthost/) every time
 linkstack starts, the command `bin/discover-smarthost` runs and refreshes
 the `state/smarthost.env` file with fresh values from Redis.
 
@@ -130,7 +135,7 @@ podman exec -ti   linkstack-app sh
 Test the module using the `test-module.sh` script:
 
 
-    ./test-module.sh <NODE_ADDR> ghcr.io/gesniusdynamics/linkstack:latest
+    ./test-module.sh <NODE_ADDR> ghcr.io/geniusdynamics/linkstack:latest
 
 The tests are made using [Robot Framework](https://robotframework.org/)
 
