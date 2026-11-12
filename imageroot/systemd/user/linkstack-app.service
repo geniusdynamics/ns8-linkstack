@@ -10,18 +10,16 @@ After=linkstack.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
-EnvironmentFile=%S/state/environment
-EnvironmentFile=-%S/state/smarthost.env
-WorkingDirectory=%S/state
+EnvironmentFile=%E/state/environment
+WorkingDirectory=%E/state
 Restart=always
 TimeoutStopSec=70
 ExecStartPre=/bin/mkdir -p tmp
 ExecStartPre=/bin/rm -f %t/linkstack-app.pid %t/linkstack-app.ctr-id
-ExecStartPre=-runagent discover-smarthost
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/linkstack-app.pid \
     --cidfile %t/linkstack-app.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/linkstack.pod-id --replace -d --name  linkstack-app \
-    --env-file=%S/state/linkstack.env \
+    --env-file=%E/state/linkstack.env \
     --volume htdocs:/htdocs:Z \
     ${LINKSTACK_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/linkstack-app.ctr-id -t 10
