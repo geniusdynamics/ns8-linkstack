@@ -1,9 +1,12 @@
 {
   "name": "linkstack",
   "description": {
-    "en": "My linkstack module"
+    "en": "LinkStack is a self-hosted link page where you publish all your links, social profiles and contacts in one place.",
+    "it": "LinkStack è una pagina di link self-hosted per pubblicare in un unico posto link, profili social e contatti."
   },
-  "categories": [],
+  "categories": [
+    "web"
+  ],
   "authors": [
     {
       "name": "Genius Dynamics",
